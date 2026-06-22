@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { motion, animate } from "framer-motion";
 import { NAV_LINKS } from "@/lib/utils";
 
 export default function Navbar() {
@@ -29,10 +29,13 @@ export default function Navbar() {
     const targetId = href.replace(/.*#/, "");
     const elem = document.getElementById(targetId);
     if (elem) {
-      const y = elem.getBoundingClientRect().top + window.scrollY - 80;
-      window.scrollTo({
-        top: y,
-        behavior: "smooth",
+      const targetY = elem.getBoundingClientRect().top + window.scrollY - 80;
+      
+      // Futuristic slow & smooth 60fps scrolling
+      animate(window.scrollY, targetY, {
+        duration: 1.2,
+        ease: [0.22, 1, 0.36, 1],
+        onUpdate: (latest) => window.scrollTo(0, latest),
       });
     }
   };
@@ -54,14 +57,22 @@ export default function Navbar() {
 
       <div className="hidden md:flex gap-8">
         {NAV_LINKS.map((link) => (
-          <a
+          <motion.a
             key={link.href}
             href={link.href}
             onClick={(e) => scrollToSection(e, link.href)}
-            className="font-label-sm text-text-warm hover:text-neo-crimson transition-colors duration-300"
+            className="relative font-label-sm text-text-warm hover:text-neo-teal transition-colors duration-300 group flex items-center justify-center"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
           >
+            <span className="absolute -left-3 opacity-0 group-hover:opacity-100 transition-opacity text-neo-teal font-bold">
+              [
+            </span>
             {link.label}
-          </a>
+            <span className="absolute -right-3 opacity-0 group-hover:opacity-100 transition-opacity text-neo-teal font-bold">
+              ]
+            </span>
+          </motion.a>
         ))}
       </div>
 
