@@ -1,26 +1,344 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* ═══════════════════════════════════════════════════════════════
+   CRIMSON MANGA LOGIC — Design System
+   Neo-Noir Manga / Industrial Brutalism
+   ═══════════════════════════════════════════════════════════════ */
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* ── Core Palette ── */
+  --color-neo-bg: #0A0A0A;
+  --color-neo-surface: #141414;
+  --color-neo-border: #2A2A2A;
+  --color-neo-crimson: #E63946;
+  --color-text-primary: #F3F3F3;
+  --color-text-muted: #888888;
+  --color-text-warm: #ab8987;
+  --color-neo-teal: #8cf4e8;
+  --color-neo-teal-dim: #6fd8cc;
+
+  /* ── Material Design 3 Tokens ── */
+  --color-md-background: #1e0f0f;
+  --color-md-surface: #1e0f0f;
+  --color-md-surface-dim: #1e0f0f;
+  --color-md-surface-bright: #473534;
+  --color-md-surface-container-lowest: #180a0a;
+  --color-md-surface-container-low: #271717;
+  --color-md-surface-container: #2c1b1b;
+  --color-md-surface-container-high: #372625;
+  --color-md-surface-container-highest: #433030;
+  --color-md-on-surface: #f9dcda;
+  --color-md-on-surface-variant: #e4bebc;
+  --color-md-outline: #ab8987;
+  --color-md-outline-variant: #5b403f;
+  --color-md-primary: #ffb3b1;
+  --color-md-primary-container: #ff535b;
+  --color-md-on-primary: #680011;
+  --color-md-secondary-container: #81262a;
+  --color-md-on-secondary-container: #ff9997;
+  --color-md-tertiary: #6fd8cc;
+  --color-md-tertiary-container: #2fa096;
+
+  /* ── Typography ── */
+  --font-anton: "Anton", sans-serif;
+  --font-hanken: "Hanken Grotesk", sans-serif;
+  --font-space: "Space Mono", monospace;
+
+  /* ── Spacing ── */
+  --spacing-gutter: 24px;
+  --spacing-margin-mobile: 16px;
+  --spacing-margin-desktop: 48px;
+  --spacing-stack-xs: 4px;
+  --spacing-stack-sm: 8px;
+  --spacing-stack-md: 16px;
+  --spacing-stack-lg: 32px;
+  --spacing-stack-xl: 64px;
+
+  /* ── Border Radius (ALL ZERO — Industrial) ── */
+  --radius: 0px;
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --radius-xl: 0px;
+  --radius-2xl: 0px;
+  --radius-full: 0px;
+
+  /* ── Animations ── */
+  --animate-glitch: glitch 1s linear infinite;
+  --animate-bounce-slow: bounce 3s infinite;
+  --animate-pulse-crimson: pulse-crimson 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ═══════════════════════════════════════════════════════════════
+   KEYFRAMES
+   ═══════════════════════════════════════════════════════════════ */
+
+@keyframes glitch-anim {
+  0% { clip-path: inset(10px 0 83px 0); }
+  20% { clip-path: inset(64px 0 20px 0); }
+  40% { clip-path: inset(27px 0 51px 0); }
+  60% { clip-path: inset(74px 0 12px 0); }
+  80% { clip-path: inset(98px 0 45px 0); }
+  100% { clip-path: inset(32px 0 89px 0); }
+}
+
+@keyframes glitch-anim-2 {
+  0% { clip-path: inset(65px 0 100px 0); }
+  20% { clip-path: inset(12px 0 56px 0); }
+  40% { clip-path: inset(89px 0 23px 0); }
+  60% { clip-path: inset(34px 0 78px 0); }
+  80% { clip-path: inset(56px 0 12px 0); }
+  100% { clip-path: inset(90px 0 45px 0); }
+}
+
+@keyframes pulse-crimson {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+@keyframes terminal-blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+@keyframes scanline {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+
+@keyframes noise-shift {
+  0% { transform: translate(0, 0); }
+  10% { transform: translate(-1%, -1%); }
+  20% { transform: translate(1%, 0); }
+  30% { transform: translate(0, 1%); }
+  40% { transform: translate(-1%, 1%); }
+  50% { transform: translate(1%, -1%); }
+  60% { transform: translate(-1%, 0); }
+  70% { transform: translate(0, -1%); }
+  80% { transform: translate(1%, 1%); }
+  90% { transform: translate(-1%, -1%); }
+  100% { transform: translate(0, 0); }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   BASE STYLES
+   ═══════════════════════════════════════════════════════════════ */
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: #0A0A0A;
+  color: #f9dcda;
+  overflow-x: hidden;
+  font-family: "Hanken Grotesk", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background-color: #E63946;
+  color: #000000;
+}
+
+/* ── 5% Noise Overlay ── */
+body::before {
+  content: "";
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  right: -50%;
+  bottom: -50%;
+  width: 200%;
+  height: 200%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.05'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9998;
+  opacity: 0.4;
+  animation: noise-shift 0.5s steps(10) infinite;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   TYPOGRAPHY UTILITIES
+   ═══════════════════════════════════════════════════════════════ */
+
+.font-display-xl {
+  font-family: "Anton", sans-serif;
+  font-size: 84px;
+  font-weight: 400;
+  line-height: 90px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.font-headline-lg {
+  font-family: "Anton", sans-serif;
+  font-size: 48px;
+  font-weight: 400;
+  line-height: 52px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.font-headline-lg-mobile {
+  font-family: "Anton", sans-serif;
+  font-size: 32px;
+  font-weight: 400;
+  line-height: 36px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.font-headline-md {
+  font-family: "Anton", sans-serif;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 28px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.font-body-lg {
+  font-family: "Hanken Grotesk", sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 28px;
+}
+
+.font-body-md {
+  font-family: "Hanken Grotesk", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+.font-label-sm {
+  font-family: "Space Mono", monospace;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   COMPONENT STYLES
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── Neo Card ── */
+.neo-card {
+  background-color: #141414;
+  border: 1px solid #2A2A2A;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              border-color 0.3s ease,
+              box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.neo-card:hover {
+  border-color: #E63946;
+  transform: scale(1.02);
+  box-shadow: 0px 10px 30px rgba(230, 57, 70, 0.15);
+}
+
+/* ── Manga Panel ── */
+.manga-panel {
+  border: 2px solid #2A2A2A;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ── Glitch Text ── */
+.glitch-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.glitch-wrapper::before,
+.glitch-wrapper::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.glitch-wrapper::before {
+  left: 2px;
+  text-shadow: -2px 0 #E63946;
+  animation: glitch-anim-2 3s infinite linear alternate-reverse;
+}
+
+.glitch-wrapper::after {
+  left: -2px;
+  text-shadow: -2px 0 #8cf4e8;
+  animation: glitch-anim 2.5s infinite linear alternate-reverse;
+}
+
+/* ── Scroll Progress Bar ── */
+.scroll-progress {
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  height: 2px;
+  background-color: #E63946;
+  z-index: 60;
+  transition: width 0.1s linear;
+}
+
+/* ── Terminal Cursor Blink ── */
+.terminal-cursor {
+  animation: terminal-blink 1s step-end infinite;
+}
+
+/* ── Dot Grid Background ── */
+.dot-grid-bg {
+  background-image: radial-gradient(#ab8987 1px, transparent 1px);
+  background-size: 16px 16px;
+  opacity: 0.1;
+}
+
+/* ── Crosshatch Pattern ── */
+.crosshatch-bg {
+  background-image: repeating-linear-gradient(
+    45deg,
+    #2A2A2A 25%,
+    transparent 25%,
+    transparent 75%,
+    #2A2A2A 75%,
+    #2A2A2A
+  ),
+  repeating-linear-gradient(
+    45deg,
+    #2A2A2A 25%,
+    #0A0A0A 25%,
+    #0A0A0A 75%,
+    #2A2A2A 75%,
+    #2A2A2A
+  );
+  background-position: 0 0, 10px 10px;
+  background-size: 20px 20px;
+}
+
+/* ── Grid Lines Background ── */
+.grid-lines-bg {
+  background-image: linear-gradient(to bottom, #2A2A2A 1px, transparent 1px);
+  background-size: 100% 20%;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   RESPONSIVE BREAKPOINTS
+   ═══════════════════════════════════════════════════════════════ */
+
+@media (max-width: 768px) {
+  .font-display-xl {
+    font-size: 48px;
+    line-height: 52px;
+  }
+
+  .font-headline-lg {
+    font-size: 32px;
+    line-height: 36px;
+  }
 }
