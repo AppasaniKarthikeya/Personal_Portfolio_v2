@@ -272,10 +272,12 @@ export default function StackSection() {
           <div className="flex justify-between items-start mb-4 relative z-10">
             <div>
               <h3 className="font-headline-md text-white">Core Engineering</h3>
-              <div className="flex gap-2 mt-2">
-                <span className="font-label-sm text-text-warm border border-neo-border px-1.5 py-0.5 text-[9px]">Java</span>
-                <span className="font-label-sm text-text-warm border border-neo-border px-1.5 py-0.5 text-[9px]">Python</span>
-                <span className="font-label-sm text-text-warm border border-neo-border px-1.5 py-0.5 text-[9px]">SQL</span>
+              <div className="flex flex-wrap gap-2 mt-2">
+                {["Java", "Python", "JavaScript", "C", "Data Structures & Algorithms", "Object-Oriented Programming"].map(tag => (
+                  <span key={tag} className="font-label-sm text-text-warm border border-neo-border px-1.5 py-0.5 text-[9px]">
+                    {tag}
+                  </span>
+                ))}
               </div>
             </div>
             <Terminal className="w-5 h-5 text-text-warm group-hover:text-neo-crimson transition-colors" />
@@ -295,9 +297,18 @@ export default function StackSection() {
           transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
           className="neo-card col-span-1 row-span-1 p-6 flex flex-col justify-between group"
         >
-          <div className="flex justify-between items-start">
-            <h3 className="font-headline-md text-white">Cloud & Infra</h3>
-            <Cloud className="w-5 h-5 text-text-warm group-hover:text-neo-crimson transition-colors" />
+          <div className="flex flex-col">
+            <div className="flex justify-between items-start">
+              <h3 className="font-headline-md text-white">Cloud & Tools</h3>
+              <Cloud className="w-5 h-5 text-text-warm group-hover:text-neo-crimson transition-colors" />
+            </div>
+            <div className="flex flex-wrap gap-2 mt-2">
+              {["AWS", "Firebase", "Git", "GitHub"].map(tag => (
+                <span key={tag} className="font-label-sm text-text-warm border border-neo-border px-1.5 py-0.5 text-[9px]">
+                  {tag}
+                </span>
+              ))}
+            </div>
           </div>
           <div className="flex items-center gap-4 mt-4">
             <div className="w-12 h-12 bg-neo-bg border border-neo-border flex items-center justify-center text-text-warm group-hover:border-neo-crimson transition-colors">
@@ -333,17 +344,16 @@ export default function StackSection() {
           className="neo-card col-span-1 md:row-span-2 p-6 flex flex-col group"
         >
           <div className="flex justify-between items-start mb-4">
-            <h3 className="font-headline-md text-white">AI & ML</h3>
+            <h3 className="font-headline-md text-white">Data & AI</h3>
             <Brain className="w-5 h-5 text-text-warm group-hover:text-neo-crimson transition-colors" />
           </div>
           <NodeGraph />
           <div className="flex flex-wrap gap-2 mt-4">
-            <span className="font-label-sm text-text-warm border border-neo-border px-2 py-1 text-[9px] hover:border-neo-teal hover:text-neo-teal transition-colors">
-              PyTorch & OpenCV
-            </span>
-            <span className="font-label-sm text-text-warm border border-neo-border px-2 py-1 text-[9px] hover:border-neo-teal hover:text-neo-teal transition-colors">
-              FastAPI
-            </span>
+            {["MySQL", "PostgreSQL", "Firebase Firestore", "SQL", "DBMS", "PyTorch", "FastAPI"].map(tag => (
+              <span key={tag} className="font-label-sm text-text-warm border border-neo-border px-2 py-1 text-[9px] hover:border-neo-teal hover:text-neo-teal transition-colors">
+                {tag}
+              </span>
+            ))}
           </div>
         </motion.div>
 
@@ -358,9 +368,15 @@ export default function StackSection() {
           className="neo-card col-span-1 md:col-span-2 row-span-1 p-6 flex flex-col justify-between group"
         >
           <div className="flex justify-between items-start">
-            <div>
+            <div className="flex flex-col">
               <h3 className="font-headline-md text-white">Web Dev</h3>
-              <span className="font-label-sm text-text-warm text-[9px] mt-1 inline-block">Next.js & React</span>
+              <div className="flex flex-wrap gap-2 mt-2">
+                {["HTML", "CSS", "Next.js", "Tailwind CSS", "React"].map(tag => (
+                  <span key={tag} className="font-label-sm text-text-warm border border-neo-border px-1.5 py-0.5 text-[9px]">
+                    {tag}
+                  </span>
+                ))}
+              </div>
             </div>
             <Terminal className="w-5 h-5 text-text-warm group-hover:text-neo-crimson transition-colors" />
           </div>
