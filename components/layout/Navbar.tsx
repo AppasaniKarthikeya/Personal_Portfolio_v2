@@ -29,8 +29,9 @@ export default function Navbar() {
     const targetId = href.replace(/.*#/, "");
     const elem = document.getElementById(targetId);
     if (elem) {
+      const y = elem.getBoundingClientRect().top + window.scrollY - 80;
       window.scrollTo({
-        top: elem.offsetTop,
+        top: y,
         behavior: "smooth",
       });
     }
