@@ -478,6 +478,166 @@ function PhysicsEngineProject() {
 }
 
 /* ═══════════════════════════════════════════════════════════════
+   AGRIAID PROJECT — Computer Vision / CNN Scanner
+   ═══════════════════════════════════════════════════════════════ */
+function AgriAidProject() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const project = PROJECTS_DATA[2];
+
+  return (
+    <div ref={containerRef} className="relative mt-8 md:mt-24">
+      <div className="md:sticky md:top-20">
+        <motion.div
+          {...motionPresets.fadeInUp}
+          className="grid grid-cols-1 md:grid-cols-5 gap-0 min-h-[70vh] manga-panel"
+        >
+          {/* Left: Text Content (40%) */}
+          <div className="md:col-span-2 p-6 md:p-10 flex flex-col justify-center bg-neo-surface border-b md:border-b-0 md:border-r border-neo-border relative overflow-hidden">
+            <motion.span
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
+              className="font-label-sm text-neo-teal mb-4 inline-block border border-neo-teal px-2 py-1 w-fit"
+            >
+              Case_{project.caseNumber}
+            </motion.span>
+
+            <motion.h3
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, delay: 0.1, ease: [0.4, 0, 0.2, 1] }}
+              className="font-display-xl text-white leading-none tracking-tighter mb-4"
+              style={{ fontSize: "clamp(36px, 5vw, 72px)" }}
+            >
+              {project.title}
+            </motion.h3>
+
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2, ease: [0.4, 0, 0.2, 1] }}
+              className="font-body-lg text-[#e4bebc] mb-6 max-w-md"
+            >
+              {project.description}
+            </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              className="flex flex-wrap gap-2 mb-8"
+            >
+              {project.tags.map((tag, i) => (
+                <motion.span
+                  key={tag}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.3, delay: 0.3 + i * 0.05 }}
+                  className="font-label-sm text-text-warm border border-neo-border px-2 py-1 text-[10px] hover:border-neo-teal hover:text-neo-teal transition-colors"
+                >
+                  {tag}
+                </motion.span>
+              ))}
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+              className="flex gap-4"
+            >
+              <a 
+                href={project.link}
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="font-label-sm px-6 py-3 bg-neo-teal text-black border border-transparent hover:bg-transparent hover:border-neo-teal hover:text-neo-teal transition-colors inline-block text-center"
+              >
+                View Project
+              </a>
+              <a 
+                href={project.link}
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="font-label-sm px-6 py-3 bg-transparent border border-text-primary text-white hover:bg-white hover:text-black transition-colors inline-block text-center"
+              >
+                Source Code
+              </a>
+            </motion.div>
+
+            {/* Decorative element */}
+            <div className="absolute -bottom-4 -right-4 w-24 h-24 border border-neo-teal/20 opacity-20 rotate-45" />
+          </div>
+
+          {/* Right: Scanning Visualization (60%) */}
+          <div className="md:col-span-3 bg-neo-bg relative overflow-hidden flex items-center justify-center p-6 md:p-12 min-h-[450px]">
+            {/* Background grid */}
+            <div className="absolute inset-0 opacity-10 dot-grid-bg" />
+
+            {/* Central Viewport */}
+            <div className="w-64 h-64 md:w-80 md:h-80 border border-neo-teal/30 bg-neo-surface relative overflow-hidden shadow-[0_0_50px_rgba(140,244,232,0.05)]">
+              {/* Corner brackets */}
+              <div className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-neo-teal" />
+              <div className="absolute top-0 right-0 w-8 h-8 border-t-2 border-r-2 border-neo-teal" />
+              <div className="absolute bottom-0 left-0 w-8 h-8 border-b-2 border-l-2 border-neo-teal" />
+              <div className="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-neo-teal" />
+
+              {/* Mock leaf silhouette (using CSS) */}
+              <div className="absolute inset-0 flex items-center justify-center opacity-20">
+                <div className="w-32 h-48 bg-neo-teal rounded-full" style={{ borderRadius: "100% 0% 100% 0%" }} />
+              </div>
+
+              {/* Scanning line */}
+              <motion.div
+                animate={{ y: [0, 320, 0] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+                className="absolute top-0 left-0 right-0 h-1 bg-neo-teal shadow-[0_0_15px_#8cf4e8]"
+              />
+
+              {/* CNN Data Overlays */}
+              <div className="absolute top-4 left-4 flex flex-col gap-1">
+                <span className="font-label-sm text-[8px] text-neo-teal bg-neo-bg px-1 border border-neo-teal/30">MODEL: CNN_RESNET50</span>
+                <span className="font-label-sm text-[8px] text-text-warm bg-neo-bg px-1 border border-neo-border">CONFIDENCE: 96.2%</span>
+              </div>
+              <div className="absolute bottom-4 right-4 flex items-center gap-1">
+                <motion.div animate={{ opacity: [1, 0, 1] }} transition={{ duration: 1, repeat: Infinity }} className="w-2 h-2 bg-neo-teal" />
+                <span className="font-label-sm text-[8px] text-neo-teal">ANALYZING</span>
+              </div>
+            </div>
+            
+            {/* Database / Cloud connection nodes */}
+            <div className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 flex flex-col gap-4">
+               {["AWS_S3", "POSTGRESQL", "FASTAPI"].map((label, i) => (
+                 <motion.div 
+                   key={label} 
+                   initial={{ opacity: 0, x: 20 }}
+                   whileInView={{ opacity: 1, x: 0 }}
+                   transition={{ delay: 0.5 + i * 0.2 }}
+                   viewport={{ once: true }}
+                   className="border border-neo-border bg-neo-surface px-2 py-1 flex items-center gap-2"
+                 >
+                   <motion.div 
+                     animate={{ opacity: [0.3, 1, 0.3] }} 
+                     transition={{ duration: 2, repeat: Infinity, delay: i * 0.3 }}
+                     className="w-1.5 h-1.5 bg-neo-crimson" 
+                   />
+                   <span className="font-label-sm text-[7px] text-text-warm">{label}</span>
+                 </motion.div>
+               ))}
+            </div>
+          </div>
+        </motion.div>
+      </div>
+    </div>
+  );
+}
+
+/* ═══════════════════════════════════════════════════════════════
    PROJECTS SECTION — Container
    ═══════════════════════════════════════════════════════════════ */
 export default function ProjectsSection() {
@@ -505,6 +665,9 @@ export default function ProjectsSection() {
 
       {/* Physics Engine */}
       <PhysicsEngineProject />
+
+      {/* AgriAid Project */}
+      <AgriAidProject />
     </section>
   );
 }
