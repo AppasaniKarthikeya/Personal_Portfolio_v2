@@ -65,11 +65,12 @@ export default function Navbar() {
       </div>
 
       <a
-        href="#contact"
-        onClick={(e) => scrollToSection(e, "#contact")}
+        href="/Resume_v2.0.pdf"
+        target="_blank"
+        rel="noopener noreferrer"
         className="font-label-sm px-4 py-2 bg-neo-crimson text-black border border-transparent hover:bg-transparent hover:border-neo-crimson hover:text-neo-crimson transition-colors duration-300"
       >
-        Connect
+        Resume
       </a>
 
       {/* Scroll Progress Bar */}

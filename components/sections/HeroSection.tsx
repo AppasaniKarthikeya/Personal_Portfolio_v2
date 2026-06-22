@@ -168,7 +168,7 @@ void main() {
       />
 
       {/* Hero Typography */}
-      <div className="relative z-10 flex flex-col gap-4 mt-20 md:mt-0">
+      <div className="relative z-10 flex flex-col gap-8 md:gap-12 mt-20 md:mt-0">
         {heroWords.map((word, i) => (
           <motion.h1
             key={word.text}
